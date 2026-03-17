@@ -1,0 +1,47 @@
+@page "/"
+@using SerialViewList.Shared.ViewModels
+@inject MainViewModel ViewModel
+@inject IJSRuntime JS
+<h3 class="top-title">Serials list</h3>
+<div class="button-container">
+    <button @ref="buttonRef" class="add-button" @onclick="HandleClick">
+        <span>Додати серіал</span>
+    </button>
+</div>
+@code {
+    private ElementReference buttonRef; // Посилання на кнопку
+    private IJSObjectReference? module;  // Твій JS-модуль
+
+    // Цей метод викликається автоматично після того, як сторінка відобразилася
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            // Завантажуємо файл. 
+            // Переконайся, що назва проєкту в шляху (SerialViewList.Shared) правильна!
+            module = await JS.InvokeAsync<IJSObjectReference>("import", 
+                "./_content/SerialViewList.Shared/Pages/MainPage.razor.js");
+        }
+    }
+
+    private async Task HandleClick(MouseEventArgs e)
+    {
+        if (module is not null)
+        {
+            // Викликаємо функцію createRipple з нашого завантаженого модуля
+            await module.InvokeVoidAsync("createRipple", e, buttonRef);
+        }
+        
+        // Тут твоя логіка ViewModel
+        // await ViewModel.SaveSerial();
+    }
+
+    // Обов'язковий метод для очищення пам'яті
+    public async ValueTask DisposeAsync()
+    {
+        if (module is not null)
+        {
+            await module.DisposeAsync();
+        }
+    }
+}

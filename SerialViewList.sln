@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialViewList", "SerialViewList\SerialViewList.csproj", "{7793C6E5-D833-4684-96A4-F5632432EA85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialViewList.Shared", "SerialViewList.Shared\SerialViewList.Shared.csproj", "{6911A0A5-F1D8-4CF0-BF3E-DB8D52247B1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialViewList.Web", "SerialViewList.Web\SerialViewList.Web.csproj", "{89263F5D-3ADC-41B9-8A82-2912608FD653}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7793C6E5-D833-4684-96A4-F5632432EA85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7793C6E5-D833-4684-96A4-F5632432EA85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7793C6E5-D833-4684-96A4-F5632432EA85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7793C6E5-D833-4684-96A4-F5632432EA85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6911A0A5-F1D8-4CF0-BF3E-DB8D52247B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6911A0A5-F1D8-4CF0-BF3E-DB8D52247B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6911A0A5-F1D8-4CF0-BF3E-DB8D52247B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6911A0A5-F1D8-4CF0-BF3E-DB8D52247B1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89263F5D-3ADC-41B9-8A82-2912608FD653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89263F5D-3ADC-41B9-8A82-2912608FD653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89263F5D-3ADC-41B9-8A82-2912608FD653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89263F5D-3ADC-41B9-8A82-2912608FD653}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
