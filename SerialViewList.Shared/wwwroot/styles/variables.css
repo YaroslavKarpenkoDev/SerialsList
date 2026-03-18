@@ -1,0 +1,17 @@
+:root {
+    /* Кольори бренду */
+    --glass-white: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-gray: #2F2D28;
+
+    /* Анімації */
+    --rainbow-grad: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
+    --rainbow-speed: 3s;
+
+    /* Ефекти */
+    --main-blur: blur(11px);
+    --modal-blur: blur(10px);
+    --btn-radius: 12px;
+    --modal-radius: 20px;
+    --main-bg: url('images/page_background.png')
+}

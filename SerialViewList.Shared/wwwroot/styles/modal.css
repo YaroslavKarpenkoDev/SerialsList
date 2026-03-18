@@ -1,0 +1,30 @@
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.cyber-modal {
+    background: var(--cyber-black);
+    border-radius: var(--modal-radius);
+    backdrop-filter: var(--modal-blur);
+}
+
+.btn-cancel {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.5);
+    border: none;
+    margin-top: 15px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.btn-cancel:hover {
+    color: white;
+}

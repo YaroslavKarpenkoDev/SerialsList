@@ -1,0 +1,13 @@
+.serial-item{
+    display: grid;
+    grid-template-columns:auto 1fr auto auto auto;
+    gap: 3px;
+    align-items: center;
+    
+    background: var(--glass-white);
+    padding: 12px;
+    margin-top: 12px;
+    backdrop-filter: var(--main-blur);
+    -webkit-backdrop-filter: var(--main-blur);
+    z-index: 1;
+}

@@ -2,16 +2,58 @@
 @using SerialViewList.Shared.ViewModels
 @inject MainViewModel ViewModel
 @inject IJSRuntime JS
-<h3 class="top-title">Serials list</h3>
+
+
 <div class="button-container">
-    <button @ref="buttonRef" class="add-button" @onclick="HandleClick">
+    <button @ref="buttonRef" class="glass-button" @onclick="HandleOpenClick">
         <span>Додати серіал</span>
     </button>
 </div>
+
+<div class="list-container">
+    <ul>
+        @foreach (var item in ViewModel.Serials)
+        {
+            <li class="serial-item">
+                <span class="serial-rating">@item.Rating</span>
+                <span class="serial-title">@item.Name</span>
+                <span class="serial-season">@item.Season</span>
+                <span class="serial-episode">@item.Episode</span>
+                <span class="serial-lastseen">@item.LastSeen</span>
+            </li>
+        }
+    </ul>
+</div>
+@if (isDialogOpen)
+{
+    <div class="modal-overlay">
+        <div class="cyber-modal">
+            <h3 class="top-title">Додати новий серіал</h3>
+            
+            <div class="input-container">
+                <input type="text" @bind="ViewModel.NewSerialName" required placeholder=" " />
+                <label>Назва серіалу</label>
+                <div class="input-glow"></div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="add-button" @onclick="SaveAndClose">
+                    <span>Зберегти</span>
+                </button>
+                <button class="btn-cancel" @onclick="() => isDialogOpen = false">Скасувати</button>
+            </div>
+        </div>
+    </div>
+}
 @code {
     private ElementReference buttonRef; // Посилання на кнопку
     private IJSObjectReference? module;  // Твій JS-модуль
-
+    private bool isDialogOpen = false;
+    protected override async Task OnInitializedAsync()
+    {
+        // Примусово завантажуємо дані при старті сторінки
+        await ViewModel.InitializeAsync();
+    }
     // Цей метод викликається автоматично після того, як сторінка відобразилася
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -24,16 +66,19 @@
         }
     }
 
-    private async Task HandleClick(MouseEventArgs e)
+    private async Task HandleOpenClick(MouseEventArgs e)
     {
+        // 1. Запускаємо ефект хвилі (JS)
         if (module is not null)
-        {
-            // Викликаємо функцію createRipple з нашого завантаженого модуля
             await module.InvokeVoidAsync("createRipple", e, buttonRef);
-        }
-        
-        // Тут твоя логіка ViewModel
-        // await ViewModel.SaveSerial();
+
+        // 2. Відкриваємо діалог
+        isDialogOpen = true;
+    }
+    private async Task SaveAndClose()
+    {
+        await ViewModel.SaveSerial();
+        isDialogOpen = false;
     }
 
     // Обов'язковий метод для очищення пам'яті

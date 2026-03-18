@@ -1,0 +1,8 @@
+@keyframes rainbow-flow {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: -200% 0%;
+    }
+}

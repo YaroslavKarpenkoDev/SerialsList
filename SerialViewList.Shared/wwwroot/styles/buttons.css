@@ -1,0 +1,64 @@
+/* Анімація, яку використовує кнопка */
+@keyframes rainbow-flow {
+    from { background-position: 0% 0%; }
+    to { background-position: -200% 0%; }
+}
+
+.button-container {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.glass-button {
+    width: 100%;
+    display: block;
+    border-radius: var(--btn-radius);
+    background: var(--glass-white);
+    backdrop-filter: var(--main-blur);
+    -webkit-backdrop-filter: var(--main-blur);
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 14px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-button::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    z-index: 1;
+}
+
+.glass-button span {
+    position: relative;
+    z-index: 2;
+    color: var(--text-gray);
+    font-weight: 900;
+}
+
+.glass-button:active {
+    transform: translateY(0) scale(0.98);
+    transition: all 0.1s ease;
+}
+
+/* Глобальний клас для ефекту хвилі (JS) */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes ripple-animation {
+    to { transform: scale(4); opacity: 0; }
+}
