@@ -14,7 +14,7 @@
     width: 100%;
     display: block;
     border-radius: var(--btn-radius);
-    background: var(--glass-white);
+    background: var(--glass-color);
     backdrop-filter: var(--main-blur);
     -webkit-backdrop-filter: var(--main-blur);
 
@@ -39,7 +39,7 @@
 .glass-button span {
     position: relative;
     z-index: 2;
-    color: var(--text-gray);
+    color: var(--text-color);
     font-weight: 900;
 }
 

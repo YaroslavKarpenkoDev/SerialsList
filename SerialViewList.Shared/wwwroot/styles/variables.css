@@ -1,8 +1,15 @@
 :root {
     /* Кольори бренду */
+    --glass-color: var(--glass-black);
+    --text-color: var(--text-white);
+    
     --glass-white: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-black: rgba(47, 45, 40, 0.8);
+    --glass-border: rgba(255, 255, 255, 1);
     --text-gray: #2F2D28;
+    --text-white: #B5B3A9;
+    
+    --modal-bg: #302F2D28;
 
     /* Анімації */
     --rainbow-grad: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);

@@ -19,7 +19,7 @@
                 <span class="serial-title">@item.Name</span>
                 <span class="serial-season">@item.Season</span>
                 <span class="serial-episode">@item.Episode</span>
-                <span class="serial-lastseen">@item.LastSeen</span>
+                <span class="serial-lastseen">@item.LastSeen?.ToString("dd.MM")</span>
             </li>
         }
     </ul>
@@ -27,13 +27,15 @@
 @if (isDialogOpen)
 {
     <div class="modal-overlay">
-        <div class="cyber-modal">
+        <div class="modal-panel">
             <h3 class="top-title">Додати новий серіал</h3>
             
             <div class="input-container">
-                <input type="text" @bind="ViewModel.NewSerialName" required placeholder=" " />
-                <label>Назва серіалу</label>
-                <div class="input-glow"></div>
+                <input type="text" @bind="ViewModel.NewSerial.Name" required placeholder="Назва серіалу " />
+                <input type="number" @bind="ViewModel.NewSerial.Rating" required placeholder="Rate"/>
+                <input type="number" @bind="ViewModel.NewSerial.Season" required placeholder="Season"/>
+                <input type="number" @bind="ViewModel.NewSerial.Episode" required placeholder="Episode"/>
+                <input type="date" @bind="ViewModel.NewSerial.LastSeen" required/>
             </div>
 
             <div class="modal-actions">

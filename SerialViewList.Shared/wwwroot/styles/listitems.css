@@ -1,13 +1,47 @@
+
+.list-container ul {
+    list-style: none; 
+    padding: 0;       
+    margin: 0;        
+    width: 100%;      
+}
 .serial-item{
     display: grid;
-    grid-template-columns:auto 1fr auto auto auto;
+    grid-template-columns:auto minmax(0, 1fr) auto auto auto;
     gap: 3px;
     align-items: center;
     
-    background: var(--glass-white);
+    width: 100%;
+    background: var(--glass-color);
+    border-radius: var(--btn-radius);
     padding: 12px;
     margin-top: 12px;
     backdrop-filter: var(--main-blur);
     -webkit-backdrop-filter: var(--main-blur);
     z-index: 1;
+}
+.serial-title {
+    white-space: normal;
+    word-break: break-word; 
+
+    min-width: 0;
+
+    line-height: 1.2;  
+}
+.serial-item span {
+    padding: 0 8px; /* Відступи всередині колонок */
+    border-right: 2px solid rgba(255, 255, 255, 0.5); /* Лінія справа */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Прибираємо лінію у останнього елемента (дати), щоб вона не стирчала збоку */
+.serial-item span:last-child {
+    border-right: none;
+}
+
+/* Назву серіалу можна притиснути до лівого краю, а не центрувати */
+.serial-title {
+    justify-content: flex-start !important;
 }

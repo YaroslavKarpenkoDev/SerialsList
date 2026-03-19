@@ -22,7 +22,7 @@ html, body {
     height: max(env(safe-area-inset-top), 38px);
 
     /* 3. Зробимо фон ТИМЧАСОВО яскравішим, щоб перевірити позицію */
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--glass-color);
 
     backdrop-filter: var(--main-blur);
     -webkit-backdrop-filter: var(--main-blur);

@@ -9,21 +9,21 @@ namespace SerialViewList.Shared.ViewModels;
 public class MainViewModel : BaseViewModel
 {
     private IInternalStorage _storage;
-    private string _newSerialName = string.Empty;
+    private Serial _newSerial = new();
     public MainViewModel(IInternalStorage storage)
     {
         _storage = storage;
     }
 
     public ObservableCollection<Serial> Serials { get; set; } = new();
-    public string NewSerialName
+    public Serial NewSerial
     {
-        get => _newSerialName;
+        get => _newSerial;
         set
         {
-            if (_newSerialName != value)
+            if (_newSerial != value)
             {
-                _newSerialName = value;
+                _newSerial = value;
                 OnPropertyChanged();
             }
         }
@@ -46,18 +46,15 @@ public class MainViewModel : BaseViewModel
     }
     public async Task SaveSerial()
     {
-        if (string.IsNullOrWhiteSpace(NewSerialName)) return;
+        if (string.IsNullOrWhiteSpace(NewSerial.Name)) 
+            return;
 
-        var newSerial = new Serial 
-        { 
-            Name = NewSerialName
-        };
+        var newSerial = NewSerial;
         
         await _storage.Save(newSerial);
         
         Serials.Add(newSerial);
-
-        NewSerialName = string.Empty;
+        NewSerial = new();
     }
 
     public async Task RefreshList()

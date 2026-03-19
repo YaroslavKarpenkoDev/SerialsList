@@ -17,5 +17,5 @@ public class Serial
     
     public int? Episode { get; set; }
     
-    public DateTime? LastSeen { get; set; }
+    public DateTime? LastSeen { get; set; } =  DateTime.Now;
 }
