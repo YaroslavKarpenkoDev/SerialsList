@@ -6,7 +6,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: env(keyboard-inset-height, 0px);
+    transition: padding-bottom 0.3s ease;
     z-index: 9999;
     backdrop-filter: var(--main-blur);
     -webkit-backdrop-filter: var(--main-blur);
@@ -14,10 +17,18 @@
 .modal-panel{
     position: absolute;
     background: var(--modal-bg);
+    border-radius: var(--btn-radius);
     padding: 15px;
+    margin: 30px;
 }
 .input-container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+.input-container input{
+    color: var(--text-color);
+}
+.top-title{
+    color: var(--text-color);
 }
