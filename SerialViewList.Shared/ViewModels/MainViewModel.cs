@@ -48,7 +48,13 @@ public class MainViewModel : BaseViewModel
     {
         if (string.IsNullOrWhiteSpace(NewSerial.Name)) 
             return;
-
+        if (NewSerial.Rating > 10) NewSerial.Rating = 10;
+        if (NewSerial.Rating < 0 || NewSerial.Rating == null) NewSerial.Rating = 0;
+    
+        if (NewSerial.Season > 999) NewSerial.Season = 999;
+        if (NewSerial.Season == null) NewSerial.Season = 0;
+        if (NewSerial.Episode > 999) NewSerial.Episode = 999;
+        if (NewSerial.Episode == null) NewSerial.Episode = 0;
         var newSerial = NewSerial;
         
         await _storage.Save(newSerial);

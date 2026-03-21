@@ -29,13 +29,15 @@
     <div class="modal-overlay">
         <div class="modal-panel">
             <h3 class="top-title">Додати новий серіал</h3>
-            
             <div class="input-container">
-                <input type="text" @bind="ViewModel.NewSerial.Name" required placeholder="Назва серіалу " />
-                <input type="number" @bind="ViewModel.NewSerial.Rating" required placeholder="Rate"/>
-                <input type="number" @bind="ViewModel.NewSerial.Season" required placeholder="Season"/>
-                <input type="number" @bind="ViewModel.NewSerial.Episode" required placeholder="Episode"/>
-                <input type="date" @bind="ViewModel.NewSerial.LastSeen" required/>
+                <input type="text" @bind="ViewModel.NewSerial.Name" placeholder="Назва серіалу " />
+                <input type="number" @bind="ViewModel.NewSerial.Rating" placeholder="Rate"
+                       oninput="if (this.value.length > 2) this.value = this.value.slice(0, 2); if(this.value > 10) this.value = 10;"/>
+                <input type="number" @bind="ViewModel.NewSerial.Season" placeholder="Season"
+                       oninput="if (this.value.length > 2) this.value = this.value.slice(0, 2);"/>
+                <input type="number" @bind="ViewModel.NewSerial.Episode" placeholder="Episode"
+                       oninput="if (this.value.length > 3) this.value = this.value.slice(0, 3);"/>
+                <input type="date" @bind="ViewModel.NewSerial.LastSeen"/>
             </div>
 
             <div class="modal-actions">
