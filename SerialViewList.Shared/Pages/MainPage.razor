@@ -4,49 +4,51 @@
 @inject MainViewModel ViewModel
 @inject IJSRuntime JS
 
+<div class="page-wrapper">
+    <div class="button-container">
+        <button @ref="buttonRef" class="glass-button" @onclick="HandleOpenClick">
+            <span>Додати серіал</span>
+        </button>
+    </div>
 
-<div class="button-container">
-    <button @ref="buttonRef" class="glass-button" @onclick="HandleOpenClick">
-        <span>Додати серіал</span>
-    </button>
+    <div class="list-container">
+        <ul>
+            @foreach (var item in ViewModel.Serials)
+            {
+                <li class="serial-item @(selectedSerialId == item.Id ? "selected" : "")"
+                    @onclick="() => SelectSerial(item.Id)">
+                    <div class="serial-main-content">
+                        <span class="serial-rating">@item.Rating</span>
+                        <span class="serial-title">@item.Name</span>
+                        <span class="serial-season">@item.Season</span>
+                        <span class="serial-episode">@item.Episode</span>
+                        <span class="serial-lastseen">@item.LastSeen?.ToString("dd.MM")</span>
+                    </div>
+                    <div class="serial-actions">
+                        <button class="common-button"
+                                @onclick="() => ViewModel.DeleteSerial(item)"
+                                @onclick:stopPropagation="true">
+                            <span>Видалити</span>
+                        </button>
+                        <button class="common-button"
+                                @onclick="() => EditSerial(item)"
+                                @onclick:stopPropagation="true">
+                            <span>Редагувати</span>
+                        </button>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
 </div>
 
-<div class="list-container">
-    <ul>
-        @foreach (var item in ViewModel.Serials)
-        {
-            <li class="serial-item @(selectedSerialId == item.Id ? "selected" : "")"
-                @onclick="() => SelectSerial(item.Id)">
-                <div class="serial-main-content">
-                    <span class="serial-rating">@item.Rating</span>
-                    <span class="serial-title">@item.Name</span>
-                    <span class="serial-season">@item.Season</span>
-                    <span class="serial-episode">@item.Episode</span>
-                    <span class="serial-lastseen">@item.LastSeen?.ToString("dd.MM")</span>
-                </div>
-                <div class="serial-actions">
-                    <button class="common-button" 
-                            @onclick="() => ViewModel.DeleteSerial(item)"
-                            @onclick:stopPropagation="true">
-                        <span>Видалити</span>
-                    </button>
-                    <button class="common-button" 
-                            @onclick="() => EditSerial(item)"
-                            @onclick:stopPropagation="true">
-                        <span>Редагувати</span>
-                    </button>
-                </div>
-            </li>
-        }
-    </ul>
-</div>
 @if (isDialogOpen)
 {
     <div class="modal-overlay">
         <div class="modal-panel">
             <h3 class="top-title">@(isEditMode ? "Редагувати серіал" : "Додати новий серіал")</h3>
             <div class="input-container">
-                <input type="text" @bind="ViewModel.NewSerial.Name" placeholder="Назва серіалу " />
+                <input type="text" @bind="ViewModel.NewSerial.Name" placeholder="Назва серіалу "/>
                 <input type="number" @bind="ViewModel.NewSerial.Rating" placeholder="Rate"
                        oninput="if (this.value.length > 2) this.value = this.value.slice(0, 2); if(this.value > 10) this.value = 10;"/>
                 <input type="number" @bind="ViewModel.NewSerial.Season" placeholder="Season"
@@ -57,7 +59,7 @@
             </div>
 
             <div class="modal-actions">
-                <button class="common-button"  @onclick="SaveAndClose">
+                <button class="common-button" @onclick="SaveAndClose">
                     <span>Зберегти</span>
                 </button>
                 <button class="common-button" @onclick="() => isDialogOpen = false">
@@ -67,17 +69,20 @@
         </div>
     </div>
 }
+
 @code {
     private ElementReference buttonRef; // Посилання на кнопку
-    private IJSObjectReference? module;  // Твій JS-модуль
+    private IJSObjectReference? module; // Твій JS-модуль
     private bool isDialogOpen = false;
     private int? selectedSerialId;
     private bool isEditMode = false;
+
     protected override async Task OnInitializedAsync()
     {
         // Примусово завантажуємо дані при старті сторінки
         await ViewModel.InitializeAsync();
     }
+
     // Цей метод викликається автоматично після того, як сторінка відобразилася
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -85,7 +90,7 @@
         {
             // Завантажуємо файл. 
             // Переконайся, що назва проєкту в шляху (SerialViewList.Shared) правильна!
-            module = await JS.InvokeAsync<IJSObjectReference>("import", 
+            module = await JS.InvokeAsync<IJSObjectReference>("import",
                 "./_content/SerialViewList.Shared/Pages/MainPage.razor.js");
         }
     }
@@ -99,13 +104,14 @@
         // 2. Відкриваємо діалог
         isDialogOpen = true;
     }
+
     private void EditSerial(Serial item)
     {
         isEditMode = true;
-    
-        ViewModel.NewSerial = new Serial 
+
+        ViewModel.NewSerial = new Serial
         {
-            Id = item.Id, 
+            Id = item.Id,
             Name = item.Name,
             Rating = item.Rating,
             Season = item.Season,
@@ -116,12 +122,14 @@
         isDialogOpen = true;
         StateHasChanged();
     }
+
     private void HandleAddNewClick()
     {
         isEditMode = false;
         ViewModel.NewSerial = new Serial { LastSeen = DateTime.Now }; // Скидаємо поля
         isDialogOpen = true;
     }
+
     private async Task SaveAndClose()
     {
         if (isEditMode)
@@ -132,9 +140,11 @@
         {
             await ViewModel.SaveSerial();
         }
+
         isDialogOpen = false;
         StateHasChanged();
     }
+
     private void SelectSerial(int id)
     {
         if (selectedSerialId == id)
@@ -145,9 +155,10 @@
         {
             selectedSerialId = id;
         }
-        
+
         StateHasChanged();
     }
+
     // Обов'язковий метод для очищення пам'яті
     public async ValueTask DisposeAsync()
     {
@@ -156,5 +167,5 @@
             await module.DisposeAsync();
         }
     }
-    
+
 }
