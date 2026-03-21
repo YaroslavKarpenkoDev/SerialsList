@@ -32,3 +32,8 @@
 .top-title{
     color: var(--text-color);
 }
+.modal-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

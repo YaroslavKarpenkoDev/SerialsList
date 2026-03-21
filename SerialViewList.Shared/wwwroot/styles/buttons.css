@@ -40,7 +40,7 @@
     position: relative;
     z-index: 2;
     color: var(--text-color);
-    font-weight: 900;
+    font-weight: var(--font-weight-bold);
 }
 
 .glass-button:active {
@@ -61,4 +61,24 @@
 
 @keyframes ripple-animation {
     to { transform: scale(4); opacity: 0; }
+}
+
+.common-button {
+    background: none;
+    border-top: none !important;
+    border-bottom: solid 2px var(--text-color);
+    border-left: solid 1px var(--text-color);
+    border-right: solid 1px var(--text-color);
+    border-radius: var(--btn-radius);
+    padding: 5px;
+    outline: none;
+}
+.common-button:active {
+    border-bottom: solid 1px var(--text-color);
+    transition: border-bottom 0.2s;
+}
+.common-button span{
+    color: var(--text-color);
+    font-size: var(--font-size-medium);
+    font-weight: var(--font-weight-semibold);
 }

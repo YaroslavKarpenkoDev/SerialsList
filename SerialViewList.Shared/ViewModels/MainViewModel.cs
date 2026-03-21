@@ -63,6 +63,25 @@ public class MainViewModel : BaseViewModel
         NewSerial = new();
     }
 
+    public async Task UpdateSerial(Serial serial)
+    {
+        await _storage.Update(serial);
+        var existingSerial = Serials.FirstOrDefault(x => x.Id == serial.Id);
+        if (existingSerial != null)
+        {
+            existingSerial.Rating = serial.Rating;
+            existingSerial.Season = serial.Season;
+            existingSerial.Episode = serial.Episode;
+            existingSerial.Name = serial.Name;
+            existingSerial.LastSeen = serial.LastSeen;
+        }
+    }
+
+    public async Task DeleteSerial(Serial serial)
+    {
+        await _storage.Delete(serial);
+        Serials.Remove(serial);
+    }
     public async Task RefreshList()
     {
         var serials = await _storage.GetAll<Serial>();

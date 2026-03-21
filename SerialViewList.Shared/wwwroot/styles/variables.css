@@ -23,5 +23,9 @@
     --font-weight-normal: 400;
     --font-weight-semibold: 600;
     --font-weight-bold: 800;
+    
+    --font-size-small: 14px;
+    --font-size-medium: 16px;
+    --font-size-large: 18px;
     --main-bg: url('images/page_background.png')
 }
