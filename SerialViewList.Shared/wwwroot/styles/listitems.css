@@ -6,8 +6,6 @@
     margin-bottom: 40px;
     overscroll-behavior-y: contain;
     -webkit-overflow-scrolling: touch;
-    mask-image: linear-gradient(to top, transparent, black 40px);
-    -webkit-mask-image: linear-gradient(to top, transparent, black 40px);
 }
 .list-container ul {
     list-style: none; 

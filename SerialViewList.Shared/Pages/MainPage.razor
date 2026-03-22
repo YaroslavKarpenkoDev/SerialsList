@@ -6,7 +6,7 @@
 
 <div class="page-wrapper">
     <div class="button-container">
-        <button @ref="buttonRef" class="glass-button" @onclick="HandleOpenClick">
+        <button @ref="buttonRef" class="glass-button" @onclick="HandleAddNewClick">
             <span>Додати серіал</span>
         </button>
     </div>
@@ -71,15 +71,14 @@
 }
 
 @code {
-    private ElementReference buttonRef; // Посилання на кнопку
-    private IJSObjectReference? module; // Твій JS-модуль
+    private ElementReference buttonRef; 
+    private IJSObjectReference? module;
     private bool isDialogOpen = false;
     private int? selectedSerialId;
     private bool isEditMode = false;
 
     protected override async Task OnInitializedAsync()
     {
-        // Примусово завантажуємо дані при старті сторінки
         await ViewModel.InitializeAsync();
     }
 
@@ -88,21 +87,9 @@
     {
         if (firstRender)
         {
-            // Завантажуємо файл. 
-            // Переконайся, що назва проєкту в шляху (SerialViewList.Shared) правильна!
             module = await JS.InvokeAsync<IJSObjectReference>("import",
                 "./_content/SerialViewList.Shared/Pages/MainPage.razor.js");
         }
-    }
-
-    private async Task HandleOpenClick(MouseEventArgs e)
-    {
-        // 1. Запускаємо ефект хвилі (JS)
-        if (module is not null)
-            await module.InvokeVoidAsync("createRipple", e, buttonRef);
-
-        // 2. Відкриваємо діалог
-        isDialogOpen = true;
     }
 
     private void EditSerial(Serial item)
@@ -126,7 +113,7 @@
     private void HandleAddNewClick()
     {
         isEditMode = false;
-        ViewModel.NewSerial = new Serial { LastSeen = DateTime.Now }; // Скидаємо поля
+        ViewModel.NewSerial = new Serial { LastSeen = DateTime.Now };
         isDialogOpen = true;
     }
 
